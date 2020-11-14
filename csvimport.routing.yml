@@ -1,0 +1,7 @@
+csvimport:
+  path: csvimport/{group}
+  defaults:
+    _form: \Drupal\csvimport\Form\CsvImportForm
+    _title: Import CSV
+  requirements:
+    _custom_access: \Drupal\csvimport\Form\CsvImportForm::access

@@ -1,0 +1,5 @@
+name: CSV Import
+type: module
+description: Batch processing a CSV import.
+core: 8.x
+package: Social
