@@ -144,6 +144,8 @@ class CsvImportForm extends FormBase {
 
     if ($csvupload = $form_state->getValue('csvupload')) {
 
+      ini_set('auto_detect_line_endings', true);
+
       if ($handle = fopen($csvupload, 'r')) {
 
         if ($line = fgetcsv($handle, 4096, $delimiter)) {
@@ -151,16 +153,19 @@ class CsvImportForm extends FormBase {
           // Validate the uploaded CSV here.
           // The example CSV happens to have cell A1 ($line[0]) as
           // below; we validate it only.
-          //
-          // You'll probably want to check several headers, eg:
-          // @codingStandardsIgnoreStart
-          // if ( $line[0] == 'Index' || $line[1] != 'Supplier' || $line[2] != 'Title' )
-          // @codingStandardsIgnoreEnd
-          $checkedAllowedFields = ['email','status','pass','field_profile_first_name','field_profile_first_name','field_profile_organisation','langcode','timezone'];
+          $checkedAllowedFields = ['email','status','pass','field_profile_first_name','field_profile_last_name','field_profile_organization','langcode','timezone'];
+          
+          //if ($line[0] != 'email' || $line[1] != 'status' || $line[2] != 'pass' || $line[3] != 'field_profile_first_name' ||  
+            //$line[4] != 'field_profile_last_name' || $line[5] != 'field_profile_organization' || $line[6] != 'langcode' || $line[7] != 'timezone' ) {
+            //$form_state->setErrorByName('csvfile', $this->t('Sorry, this file does not match the expected format.'));
+          //}
 
-          if (!in_array($line[0],$checkedAllowedFields)) {
-            $form_state->setErrorByName('csvfile', $this->t('Sorry, this file does not match the expected format.'));
+          //kint($line);
+
+          if(!in_array($line, $checkedAllowedFields)) {
+            //$form_state->setErrorByName('csvfile', $this->t('Sorry, this file does not match the expected format.'));
           }
+
         }
         fclose($handle);
       }

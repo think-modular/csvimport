@@ -52,6 +52,8 @@ class CsvImportBatch {
           '@csv_filepath' => $csv_filepath,
         ];
 
+        ini_set('auto_detect_line_endings', true);
+
         if ($handle = fopen($csv_filepath, 'w+')) {
 
           foreach ($results['failed_rows'] as $failed_row) {
