@@ -163,7 +163,7 @@ class CsvImportForm extends FormBase {
           //kint($line);
 
           if(!in_array($line, $checkedAllowedFields)) {
-            //$form_state->setErrorByName('csvfile', $this->t('Sorry, this file does not match the expected format.'));
+            $form_state->setErrorByName('csvfile', $this->t('Sorry, this file does not match the expected format.'));
           }
 
         }
