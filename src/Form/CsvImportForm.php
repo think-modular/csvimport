@@ -150,19 +150,8 @@ class CsvImportForm extends FormBase {
 
         if ($line = fgetcsv($handle, 4096, $delimiter)) {
 
-          // Validate the uploaded CSV here.
-          // The example CSV happens to have cell A1 ($line[0]) as
-          // below; we validate it only.
-          $checkedAllowedFields = ['email','status','pass','field_profile_first_name','field_profile_last_name','field_profile_organization','langcode','timezone'];
-          
-          //if ($line[0] != 'email' || $line[1] != 'status' || $line[2] != 'pass' || $line[3] != 'field_profile_first_name' ||  
-            //$line[4] != 'field_profile_last_name' || $line[5] != 'field_profile_organization' || $line[6] != 'langcode' || $line[7] != 'timezone' ) {
-            //$form_state->setErrorByName('csvfile', $this->t('Sorry, this file does not match the expected format.'));
-          //}
-
-          //kint($line);
-
-          if(!in_array($line, $checkedAllowedFields)) {
+          if ($line[0] != 'email' && $line[1] != 'status' && $line[2] != 'pass' && $line[3] != 'field_profile_first_name' &&  
+            $line[4] != 'field_profile_last_name' || $line[5] != 'field_profile_organization' || $line[6] != 'langcode' || $line[7] != 'timezone' ) {
             $form_state->setErrorByName('csvfile', $this->t('Sorry, this file does not match the expected format.'));
           }
 
