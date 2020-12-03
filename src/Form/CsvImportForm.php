@@ -41,6 +41,7 @@ class CsvImportForm extends FormBase {
     $form['csvfile'] = [
       '#title'            => $this->t('CSV File'),
       '#type'             => 'file',
+      '#required'	  => TRUE,
       '#description'      => ($max_size = Environment::getUploadMaxSize()) ? $this->t('Due to server restrictions, the <strong>maximum upload file size is @max_size</strong>. Files that exceed this size will be disregarded.', ['@max_size' => format_size($max_size)]) : '',
       '#element_validate' => ['::validateFileupload'],
     ];
