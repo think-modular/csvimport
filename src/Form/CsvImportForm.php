@@ -74,7 +74,7 @@ class CsvImportForm extends FormBase {
       '#open' => TRUE // Controls the HTML5 'open' attribute. Defaults to FALSE.
     );
 
-    $help_content = [
+   /* $help_content = [
       '#theme' => 'item_list',
       '#list_type' => 'ol',
       '#title' => t('Required field names and ordering!'),
@@ -91,7 +91,7 @@ class CsvImportForm extends FormBase {
       '#wrapper_attributes' => ['class' => 'container'],
     ];
 
-    $form['help']['#markup'] = render($help_content);
+    $form['help']['#markup'] = render($help_content);*/
 
     return $form;
 
