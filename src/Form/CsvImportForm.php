@@ -41,7 +41,6 @@ class CsvImportForm extends FormBase {
     $form['csvfile'] = [
       '#title'            => $this->t('CSV File'),
       '#type'             => 'file',
-      '#required'	  => TRUE,
       '#description'      => ($max_size = Environment::getUploadMaxSize()) ? $this->t('Due to server restrictions, the <strong>maximum upload file size is @max_size</strong>. Files that exceed this size will be disregarded.', ['@max_size' => format_size($max_size)]) : '',
       '#element_validate' => ['::validateFileupload'],
     ];
@@ -106,6 +105,8 @@ class CsvImportForm extends FormBase {
       'file_validate_extensions' => ['csv'],
     ];
 
+
+
     // @TODO: File_save_upload will probably be deprecated soon as well.
     // @see https://www.drupal.org/node/2244513.
     if ($file = file_save_upload('csvfile', $validators, FALSE, 0, FILE_EXISTS_REPLACE)) {
@@ -135,7 +136,15 @@ class CsvImportForm extends FormBase {
   public function validateForm(array &$form, FormStateInterface $form_state) {
 
     $delimiter = $form_state->getValue('delimiter');
+    $csvupload = $form_state->getValue('csvupload');
 
+    if (!$csvupload) {
+
+      $form_state->setErrorByName('csvfile', $this->t('You have to upload a file!'));
+    
+    }
+
+    
     if ($delimiter == 1) {
       $delimiter = ';';
     }
