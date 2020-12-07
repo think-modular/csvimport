@@ -303,7 +303,7 @@ class CsvImportBatch {
 
     $allowed_languages = \Drupal::languageManager()->getLanguages();
 
-    if(in_array($langcode,$allowed_languages)) {
+    if(array_key_exists($langcode,$allowed_languages)) {
       return true;
     }
 
@@ -313,7 +313,7 @@ class CsvImportBatch {
 
   public static function isValidTimezone($timezone) {
 
-    $timezones = User::getAllowedTimezones();
+    $timezones = User::getAllowedTimezones();   
 
     if (in_array($timezone, $timezones)) {
       return true;
